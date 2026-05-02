@@ -8,6 +8,11 @@ import 'react-image-crop/dist/ReactCrop.css';
 import { verificarAuth, login, logout } from '../actions/auth';
 import { subirProducto, borrarProductoAction } from '../actions/productos';
 
+// Importamos el icono de casita para que quede más pro
+const HomeIcon = () => (
+  <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="3" strokeLinecap="round" strokeLinejoin="round"><path d="m3 9 9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"/><polyline points="9 22 9 12 15 12 15 22"/></svg>
+);
+
 export default function AdminPage() {
   const [cargando, setCargando] = useState(false);
   const [mensaje, setMensaje] = useState("");
@@ -50,17 +55,15 @@ export default function AdminPage() {
     setProductos([]); 
   };
 
-  // Esta función solo LEE, así que sigue funcionando igual
   async function fetchProductos() {
     const { data } = await supabase.from("productos").select("*").order("created_at", { ascending: false });
     if (data) setProductos(data);
   }
 
-  // Ahora llama al Servidor en lugar de a Supabase directamente
   async function eliminarProducto(id: string, imagenUrl: string) {
     if (!confirm("¿Eliminar este producto?")) return;
     try {
-      await borrarProductoAction(id, imagenUrl); // ¡MAGIA SEGURA AQUÍ!
+      await borrarProductoAction(id, imagenUrl);
       fetchProductos();
       setMensaje("Eliminado");
     } catch (error: any) {
@@ -97,7 +100,6 @@ export default function AdminPage() {
     });
   }
 
-  // Ahora empaqueta todo y se lo manda al Servidor Secreto
   async function handleSubmit(e: React.FormEvent<HTMLFormElement>) {
     e.preventDefault();
     setCargando(true);
@@ -108,11 +110,9 @@ export default function AdminPage() {
     try {
       if (imgRef.current && completedCrop) {
         const croppedBlob = await getCroppedImg(imgRef.current, completedCrop);
-        // Empaquetamos la imagen en el formulario
         formData.append("imagen", croppedBlob, "imagen.jpg");
       }
 
-      // ¡MAGIA SEGURA AQUÍ! Se lo enviamos a la función de servidor
       await subirProducto(formData); 
 
       setMensaje("¡Listo!");
@@ -155,8 +155,18 @@ export default function AdminPage() {
   }
 
   return (
-    <main className="min-h-screen p-4 md:p-8 bg-pink-50 flex flex-col items-center font-sans text-pink-900">
-      <div className="w-full max-w-5xl mb-8 text-center">
+    <main className="min-h-screen p-4 md:p-8 bg-pink-50 flex flex-col items-center font-sans text-pink-900 relative">
+      
+      {/* BOTÓN PARA VOLVER AL INICIO */}
+      <button 
+        onClick={() => router.push('/')}
+        className="fixed top-4 left-4 md:top-8 md:left-8 z-50 flex items-center gap-2 bg-white text-pink-500 px-4 py-2 rounded-full font-black uppercase text-[10px] shadow-lg border-b-4 border-pink-200 hover:scale-105 active:scale-95 transition-all group"
+      >
+        <HomeIcon />
+        <span className="hidden md:inline">Volver a la tienda</span>
+      </button>
+
+      <div className="w-full max-w-5xl mb-8 text-center mt-12 md:mt-0">
         <h2 className="text-3xl md:text-4xl font-black uppercase tracking-tighter italic bg-gradient-to-r from-pink-600 via-rose-500 to-purple-500 bg-clip-text text-transparent">
           Hola de nuevo Karol, ¿alguna idea hoy?
         </h2>

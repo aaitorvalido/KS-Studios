@@ -38,12 +38,7 @@ export default function HeroAnimado() {
 
       <div className="sticky top-0 h-screen w-full flex flex-col items-center bg-white overflow-hidden">
         
-        {/* ELEMENTOS DE FONDO */}
-        <div className={`absolute inset-0 overflow-hidden transition-opacity duration-700 ${isFinalFrame ? 'opacity-0' : 'opacity-10'}`}>
-          <img src="/camisa.png" className="absolute top-[10%] left-[5%] w-32 rotate-12 blur-[1px]" alt="" />
-          <img src="/bolson.png" className="absolute top-[40%] right-[8%] w-40 -rotate-12 blur-[2px]" alt="" />
-          <img src="/percha.png" className="absolute bottom-[15%] left-[10%] w-24 rotate-45 blur-[1px]" alt="" />
-        </div>
+     
 
         <div className="relative w-full h-full flex flex-col items-center">
           
