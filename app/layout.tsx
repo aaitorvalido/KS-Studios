@@ -19,6 +19,11 @@ export const metadata: Metadata = {
   keywords: ["serigrafía Las Palmas", "regalos personalizados", "tazas personalizadas", "diseño textil", "KS Studios"],
   authors: [{ name: "KS Studios" }],
   
+  // VERIFICACIÓN DE GOOGLE (Tu código específico)
+  verification: {
+    google: "BsraKmB15E0DrWuxDH1v82d36CavO0Ej6ndELOpIegI", 
+  },
+
   // Cómo se verá cuando compartas el link por WhatsApp o redes
   openGraph: {
     title: "KS Studios | Serigrafía Personalizada",
@@ -27,7 +32,7 @@ export const metadata: Metadata = {
     siteName: "KS Studios",
     images: [
       {
-        url: "/og-image.jpg", // Si tienes una imagen de portada, ponla en la carpeta public con este nombre
+        url: "/og-image.png", // Configurado para tu archivo PNG
         width: 1200,
         height: 630,
         alt: "KS Studios - Serigrafía y Diseño",
@@ -39,8 +44,8 @@ export const metadata: Metadata = {
   
   // Iconos de la pestaña
   icons: {
-    icon: "/favicon.ico", // El icono pequeño de la pestaña
-    apple: "/apple-touch-icon.png", // Para cuando alguien lo guarda en un iPhone
+    icon: "/favicon.ico",
+    apple: "/apple-touch-icon.png",
   },
 };
 
@@ -51,10 +56,12 @@ export default function RootLayout({
 }>) {
   return (
     <html
-      lang="es" // ¡Cambiado a español para que Google sepa el idioma!
+      lang="es"
       className={`${geistSans.variable} ${geistMono.variable} h-full antialiased`}
     >
-      <body className="min-h-full flex flex-col">{children} bodies</body>
+      <body className="min-h-full flex flex-col">
+        {children}
+      </body>
     </html>
   );
 }
