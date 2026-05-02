@@ -150,7 +150,7 @@ export default function Home() {
   <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 items-center">
     <div className="text-center md:text-left">
       <h2 className={`text-4xl md:text-7xl font-black uppercase tracking-tighter leading-none mb-6 ${isDark ? 'text-white' : 'text-zinc-900'}`}>
-        About<br className="hidden md:block"/>KS Studios
+        <br className="hidden md:block"/>KS Studios
       </h2>
       <p className={`text-base md:text-xl font-medium leading-relaxed max-w-xl mx-auto md:mx-0 ${isDark ? 'text-zinc-400' : 'text-zinc-600'}`}>
         Especialistas en transformar tus ideas en piezas únicas. En KS Studios combinamos técnicas tradicionales con diseños modernos para marcar la diferencia.
